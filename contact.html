@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us | {{ COMPANY_NAME }}{% endblock %}
+{% block meta_description %}Get in touch with {{ COMPANY_NAME }} for a free quote. Call, email, or send us a message and a project manager will respond within one business day.{% endblock %}
+
+{% block content %}
+
+<!-- ===================== PAGE HEADER ===================== -->
+<section class="page-header">
+    <div class="container">
+        <p class="hero__eyebrow">We'd Love To Hear From You</p>
+        <h1 class="page-header__title">Contact {{ COMPANY_NAME }}</h1>
+        <p class="page-header__subtitle">
+            Whether you're planning a new build, a renovation, or just have a
+            question, our team is ready to help. Reach out using the form
+            below or through any of the channels listed alongside it.
+        </p>
+    </div>
+</section>
+
+<!-- ===================== CONTACT CHANNELS + FORM ===================== -->
+<section class="contact-page" id="contact-page">
+    <div class="container contact-page__grid">
+
+        <!-- Alternative contact channels -->
+        <aside class="channels" aria-labelledby="channels-heading">
+            <p class="section-eyebrow">Other Ways To Reach Us</p>
+            <h2 id="channels-heading" class="section-title">Prefer To Talk Directly?</h2>
+            <p class="channels__intro">
+                Pick whichever channel is easiest for you &mdash; our team
+                monitors all of them during business hours.
+            </p>
+
+            <ul class="channels__list">
+                <li class="channel-card">
+                    <span class="channel-card__icon" aria-hidden="true">📞</span>
+                    <div class="channel-card__body">
+                        <h3 class="channel-card__title">Call Us</h3>
+                        <a href="tel:{{ COMPANY_PHONE }}" class="channel-card__value">{{ COMPANY_PHONE }}</a>
+                        <p class="channel-card__meta">Mon&ndash;Fri, 7:00 AM&ndash;5:00 PM</p>
+                    </div>
+                </li>
+
+                <li class="channel-card">
+                    <span class="channel-card__icon" aria-hidden="true">✉️</span>
+                    <div class="channel-card__body">
+                        <h3 class="channel-card__title">Email Support</h3>
+                        <a href="mailto:{{ COMPANY_EMAIL }}" class="channel-card__value">{{ COMPANY_EMAIL }}</a>
+                        <p class="channel-card__meta">We reply within one business day</p>
+                    </div>
+                </li>
+
+                <li class="channel-card">
+                    <span class="channel-card__icon" aria-hidden="true">📍</span>
+                    <div class="channel-card__body">
+                        <h3 class="channel-card__title">Visit Our Office</h3>
+                        <span class="channel-card__value">{{ COMPANY_ADDRESS }}</span>
+                        <p class="channel-card__meta">Free on-site consultations available</p>
+                    </div>
+                </li>
+
+                <li class="channel-card">
+                    <span class="channel-card__icon" aria-hidden="true">💬</span>
+                    <div class="channel-card__body">
+                        <h3 class="channel-card__title">Live Chat</h3>
+                        <a href="#" class="channel-card__value">Start a conversation</a>
+                        <p class="channel-card__meta">Available on business days, 9 AM&ndash;4 PM</p>
+                    </div>
+                </li>
+
+                <li class="channel-card">
+                    <span class="channel-card__icon" aria-hidden="true">🔗</span>
+                    <div class="channel-card__body">
+                        <h3 class="channel-card__title">Follow &amp; Message Us</h3>
+                        <div class="channel-card__social">
+                            <a href="#" aria-label="Falcon Builders on Facebook">Facebook</a>
+                            <a href="#" aria-label="Falcon Builders on Instagram">Instagram</a>
+                            <a href="#" aria-label="Falcon Builders on LinkedIn">LinkedIn</a>
+                        </div>
+                        <p class="channel-card__meta">DMs are checked daily</p>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Contact form -->
+        <div class="contact-page__form-wrap">
+            <p class="section-eyebrow">Send A Message</p>
+            <h2 class="section-title">Request a Free Quote</h2>
+            <p class="contact-page__form-intro">
+                Fill out the form below with a few details about your project
+                and we'll get back to you shortly.
+            </p>
+
+            <form class="contact-page__form" id="contactForm" method="post" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Tell us about your project or question..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--block">Send Message</button>
+
+                <p class="contact-page__form-note" id="formStatus" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===================== MAP (slides in from the right) ===================== -->
+<section class="map-section">
+    <div class="container">
+        <div class="map-card reveal-right" id="mapReveal">
+            <div class="map-card__info">
+                <p class="section-eyebrow">Find Us</p>
+                <h2 class="section-title">Visit Our Office</h2>
+                <p class="map-card__address">📍 {{ COMPANY_ADDRESS }}</p>
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query={{ COMPANY_ADDRESS|urlencode }}"
+                    class="btn btn--secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >Get Directions</a>
+            </div>
+            <div class="map-card__frame">
+                <iframe
+                    title="Map showing the {{ COMPANY_NAME }} office location"
+                    src="https://www.google.com/maps?q={{ COMPANY_ADDRESS|urlencode }}&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Placeholder submit handler — wire this up to your email service
+    // (e.g. an API endpoint, Formspree, SendGrid, or a Django view that
+    // sends mail). The name/email/message field IDs and names below are
+    // stable integration points for that service.
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var status = document.getElementById('formStatus');
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var message = document.getElementById('message').value.trim();
+
+        if (!name || !email || !message) {
+            status.textContent = 'Please fill out all fields before sending.';
+            status.classList.add('is-error');
+            return;
+        }
+
+        // TODO: replace with a real request to your email service, e.g.:
+        // fetch('/api/contact/', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ name: name, email: email, message: message })
+        // }).then(...)
+
+        status.classList.remove('is-error');
+        status.textContent = 'Thanks, ' + name.split(' ')[0] + '! Your message has been sent — we\'ll be in touch soon.';
+        this.reset();
+    });
+
+    // Map slide-in-from-right reveal, triggered as the section scrolls
+    // into view. Uses IntersectionObserver (no scroll listener) and is
+    // skipped for prefers-reduced-motion, matching the pattern used on
+    // the Projects page image reveals.
+    (function () {
+        var mapEl = document.getElementById('mapReveal');
+        if (!mapEl) return;
+
+        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if ('IntersectionObserver' in window && !prefersReducedMotion) {
+            var mapObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        mapObserver.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+            mapObserver.observe(mapEl);
+        } else {
+            mapEl.classList.add('is-visible');
+        }
+    })();
+</script>
+{% endblock %}

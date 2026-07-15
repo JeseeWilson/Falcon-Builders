@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+    <div class="hero__bg" id="heroParallaxBg"></div>
+    <div class="container hero__inner">
+        <p class="hero__eyebrow">Licensed General Contractor &middot; {{ COMPANY_YEARS }}+ Years of Experience</p>
+        <h1 class="hero__title">Building Structures That Stand the Test of Time</h1>
+        <p class="hero__subtitle">
+            {{ COMPANY_NAME }} delivers commercial, residential, and renovation
+            projects across the region &mdash; on schedule, on budget, and built
+            to last.
+        </p>
+        <div class="hero__actions">
+            <a href="{% url 'core:contact' %}" class="btn btn--primary btn--lg">Get a Free Quote</a>
+            <a href="{% url 'core:projects' %}" class="btn btn--outline btn--lg">View Our Projects</a>
+        </div>
+        <ul class="hero__badges">
+            <li>✅ Licensed &amp; Insured</li>
+            <li>✅ Free On-Site Estimates</li>
+            <li>✅ 350+ Projects Completed</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ===================== COMPANY OVERVIEW ===================== -->
+<section class="overview" id="about">
+    <div class="container overview__grid">
+        <div class="overview__media" aria-hidden="true">
+            <div class="overview__media-block"></div>
+        </div>
+        <div class="overview__content">
+            <p class="section-eyebrow">Who We Are</p>
+            <h2 class="section-title">A Trusted Name in Construction Since Day One</h2>
+            <p>
+                For over {{ COMPANY_YEARS }} years, {{ COMPANY_NAME }} has partnered
+                with property owners, developers, and businesses to bring ambitious
+                building projects to life. From ground-up commercial developments to
+                custom homes and detailed renovations, our in-house team of
+                architects, project managers, and skilled tradespeople manages every
+                phase of construction with precision and transparency.
+            </p>
+            <p>
+                We believe great construction is built on clear communication,
+                rigorous safety standards, and craftsmanship that lasts well beyond
+                the final walkthrough. That's why our clients keep coming back
+                &mdash; and why they refer us to others.
+            </p>
+            <a href="#contact" class="btn btn--secondary">Schedule a Consultation</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== STATS / TRUST BAR ===================== -->
+<section class="stats">
+    <div class="container stats__grid">
+        {% for stat in stats %}
+        <div class="stats__item">
+            <span class="stats__value">{{ stat.value }}</span>
+            <span class="stats__label">{{ stat.label }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="services" id="services">
+    <div class="container">
+        <p class="section-eyebrow section-eyebrow--center">What We Do</p>
+        <h2 class="section-title section-title--center">Our Core Services</h2>
+        <p class="section-subtitle">
+            From the first blueprint to the final inspection, we offer end-to-end
+            construction services tailored to your project's scope and budget.
+        </p>
+
+        <div class="services__grid">
+            {% for service in services %}
+            <article class="service-card">
+                <div class="service-card__icon" aria-hidden="true">{{ service.icon }}</div>
+                <h3 class="service-card__title">{{ service.title }}</h3>
+                <p class="service-card__desc">{{ service.description }}</p>
+                <a href="#contact" class="service-card__link">Learn more &rarr;</a>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===================== PROJECTS SHOWCASE ===================== -->
+<section class="projects" id="projects">
+    <div class="container">
+        <p class="section-eyebrow section-eyebrow--center">Our Work</p>
+        <h2 class="section-title section-title--center">Recent Projects</h2>
+        <p class="section-subtitle">
+            A selection of commercial, residential, and renovation projects
+            completed by the Falcon Builders team.
+        </p>
+
+        <div class="projects__grid">
+            {% for project in projects %}
+            <article class="project-card">
+                <div class="project-card__image project-card__image--{{ forloop.counter }}" role="img" aria-label="{{ project.title }} project photo"></div>
+                <div class="project-card__body">
+                    <span class="project-card__tag">{{ project.category }}</span>
+                    <h3 class="project-card__title">{{ project.title }}</h3>
+                    <p class="project-card__desc">{{ project.description }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div style="text-align:center; margin-top:2rem;">
+            <a href="{% url 'core:projects' %}" class="btn btn--secondary">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CERTIFICATIONS ===================== -->
+<section class="certifications">
+    <div class="container">
+        <h2 class="certifications__title">Certified, Licensed &amp; Trusted</h2>
+        <ul class="certifications__list">
+            {% for cert in certifications %}
+            <li>🛡️ {{ cert }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="testimonials">
+    <div class="container">
+        <p class="section-eyebrow section-eyebrow--center">Client Feedback</p>
+        <h2 class="section-title section-title--center">What Our Clients Say</h2>
+
+        <div class="testimonials__grid">
+            {% for t in testimonials %}
+            <blockquote class="testimonial-card">
+                <p class="testimonial-card__quote">&ldquo;{{ t.quote }}&rdquo;</p>
+                <footer class="testimonial-card__author">
+                    <span class="testimonial-card__name">{{ t.name }}</span>
+                    <span class="testimonial-card__role">{{ t.role }}</span>
+                </footer>
+            </blockquote>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CONTACT / CTA ===================== -->
+<section class="contact" id="contact">
+    <div class="container contact__grid">
+        <div class="contact__info">
+            <p class="section-eyebrow">Get In Touch</p>
+            <h2 class="section-title">Ready to Start Your Project?</h2>
+            <p>
+                Tell us a bit about what you're planning and a Falcon Builders
+                project manager will get back to you within one business day
+                with a free, no-obligation estimate.
+            </p>
+            <ul class="contact__details">
+                <li>📍 {{ COMPANY_ADDRESS }}</li>
+                <li>📞 <a href="tel:{{ COMPANY_PHONE }}">{{ COMPANY_PHONE }}</a></li>
+                <li>✉️ <a href="mailto:{{ COMPANY_EMAIL }}">{{ COMPANY_EMAIL }}</a></li>
+                <li>🕒 Mon&ndash;Fri: 7:00 AM&ndash;5:00 PM</li>
+            </ul>
+        </div>
+
+        <form class="contact__form" method="post" action="{% url 'core:home' %}#contact" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">Full Name</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email Address</label>
+                {{ form.email }}
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                    {{ form.phone }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.service.id_for_label }}">Service Needed</label>
+                    {{ form.service }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.message.id_for_label }}">Project Details</label>
+                {{ form.message }}
+            </div>
+            <button type="submit" class="btn btn--primary btn--block">Request Your Free Quote</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
